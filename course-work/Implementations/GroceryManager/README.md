@@ -12,3 +12,5 @@
 - GM.Models -> None
 - GM.Server -> Start without debugging
 - "Start" the project - you will see the both server (blank page) & client page.
+### DB
+- The Blazor application will use dynamic in memory DB.
