@@ -28,4 +28,10 @@
 ### Step 7 
 - Under GM.Client / Dependecies / Packages -> right button -> Manage NuGet Packages -> Add "Simple.Odata.Client" (5.25) -> Install -> I Agree.
 ### Step 8
+- Get the whole WOM.Client from the Exercises (WorkOutManager) and paste it here.
+- Rename and rebuild the whole new GM.Client with the Grocery related info (classes, methods, properties).
+### Step 9
+- Change my GM.Server locahost:xxxxx port with the new one
+in GM.Client / Data / GrocerySimpleData.cs -> line 16
+http://localhost:49248/odata
 
