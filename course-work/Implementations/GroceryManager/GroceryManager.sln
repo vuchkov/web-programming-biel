@@ -7,11 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GM.Models", "GM.Models\GM.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GM.Server", "GM.Server\GM.Server.csproj", "{33E18F21-EE77-4735-AED8-BED426945760}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GM.Client", "GM.Client\GM.Client.csproj", "{CBB3EE91-4D67-4CFE-BF9D-ABAE3DE5BCB7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F16E612A-30EB-4BEE-843F-2762EDDD4D30}"
-	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GM.Client", "GM.Client\GM.Client.csproj", "{02E2654E-59BF-4978-86C5-BFD77801344D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2E6D3F2C-D625-4FEE-B989-CF5644803CEC} = {2E6D3F2C-D625-4FEE-B989-CF5644803CEC}
 	EndProjectSection
 EndProject
 Global
@@ -28,10 +26,10 @@ Global
 		{33E18F21-EE77-4735-AED8-BED426945760}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33E18F21-EE77-4735-AED8-BED426945760}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33E18F21-EE77-4735-AED8-BED426945760}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBB3EE91-4D67-4CFE-BF9D-ABAE3DE5BCB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBB3EE91-4D67-4CFE-BF9D-ABAE3DE5BCB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBB3EE91-4D67-4CFE-BF9D-ABAE3DE5BCB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBB3EE91-4D67-4CFE-BF9D-ABAE3DE5BCB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02E2654E-59BF-4978-86C5-BFD77801344D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02E2654E-59BF-4978-86C5-BFD77801344D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02E2654E-59BF-4978-86C5-BFD77801344D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02E2654E-59BF-4978-86C5-BFD77801344D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

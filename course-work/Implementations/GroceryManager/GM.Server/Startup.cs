@@ -32,7 +32,7 @@ namespace GM.Server
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<GroceryDbContext>(db => db.UseInMemoryDatabase("WorkOutDb"));
+            services.AddDbContext<GroceryDbContext>(db => db.UseInMemoryDatabase("GroceryDb"));
             services.AddCors(cors =>
             {
                 cors.AddDefaultPolicy(policy => policy.AllowAnyOrigin()
@@ -64,7 +64,7 @@ namespace GM.Server
                 routes.EnableDependencyInjection();
                 routes.Select().OrderBy().Filter().Count();
                 var builder = new ODataConventionModelBuilder();
-                builder.EntitySet<Grocery>("workouts").EntityType.Filter().Count().Expand().OrderBy().Select();
+                builder.EntitySet<Grocery>("groceries").EntityType.Filter().Count().Expand().OrderBy().Select();
                 routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
                 routes.MapRoute(
                     name: "default",

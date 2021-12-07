@@ -1,0 +1,99 @@
+﻿
+@using GM.Models;
+@using GM.Client.ViewModels;
+
+@inject GroceryViewModel viewModel;
+
+<h2>Grocery List</h2>
+
+<p>Show grocery list:
+    <input type="checkbox" @bind-value="viewModel.ShowAll" />
+</p>
+<p>
+    Sort by created on:
+    <input type="checkbox" @bind-value="viewModel.SortByCreatedOn" />
+</p>
+@if (viewModel.ShowAll && !viewModel.SortByCreatedOn)
+{ 
+<p>
+    Sort by expired on:
+    <input type="checkbox" @bind-value="viewModel.SortByExpiredOn" />
+</p>
+}
+<p>Enter new item:</p>
+@if (viewModel.ValidationErrors)
+{
+    <GroceryError Errors="@viewModel.Errors"></GroceryError>
+}
+
+<p>
+    <input name="newItem" type="text"
+           @ref="InputBox"
+           @attributes="inputAttributes"
+           @bind-value="@viewModel.NewName"
+           @bind-value:event="oninput"/>
+    <button @attributes="btnAttributes"
+            @onclick="@(async () => await viewModel.AddNewAsync())"
+            >Save</button>
+</p>
+
+@if (groceries == null || viewModel.Loading)
+{
+    <p class="alert alert-dark">Loading...</p>
+}
+else
+{
+    @foreach (Grocery grocery in groceries)
+    {
+        <hr />
+        <GroceryShow CurrentItem="@grocery"
+                     Delete="@(async () => await viewModel.DeleteAsync(grocery))"
+                     MarkAsExpired="@(async () => await viewModel.MarkGroceryAsExpiredAsync(grocery))"></GroceryShow>
+    }
+}
+
+@code {
+    public ElementReference InputBox;
+    public List<Grocery> groceries;
+
+    public Dictionary<string, object> btnAttributes = new Dictionary<string, object>()
+        {
+            { "disabled", "" }
+        };
+    public Dictionary<string, object> inputAttributes = new Dictionary<string, object>() { };
+
+    private void CheckButton()
+    {
+        btnAttributes.Clear();
+        inputAttributes.Clear();
+        if (viewModel.Loading)
+        {
+            btnAttributes.Add("disabled", "");
+            inputAttributes.Add("disabled", "");
+        }
+        else if (viewModel.ValidationErrors)
+        {
+            btnAttributes.Add("disabled", "");
+            inputAttributes.Add("class", "alert-danger");
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        groceries = (await viewModel.GroceryAsync()).ToList();
+        viewModel.PropertyChanged += async (o, e) =>
+        {
+            CheckButton();
+            if (e.PropertyName.Equals(nameof(viewModel.GroceryAsync)))
+            {
+                groceries = (await viewModel.GroceryAsync()).ToList();
+            }
+            await InvokeAsync(() =>
+            {
+                StateHasChanged();
+            });
+        };
+
+        await base.OnInitializedAsync();
+    }
+}

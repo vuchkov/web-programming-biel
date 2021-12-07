@@ -1,0 +1,27 @@
+﻿@using GM.Models;
+
+<div>
+    <button @onclick="Delete">Delete</button>&nbsp;
+    @if (CurrentItem.IsExpire)
+    { 
+        <p class="alert-info">@CurrentItem.Name</p>
+        <p>Completed on: @CurrentItem.ExpireOn</p>
+    }
+    else 
+    { 
+        <button @onclick="MarkAsExpired">Done</button>
+        <p>@CurrentItem.Name</p>
+    }
+<p>Created on: @CurrentItem.CreatedOn</p>
+</div>
+
+@code {
+    [Parameter]
+    public Grocery CurrentItem { get; set; }
+    [Parameter]
+    public Action Delete { get; set; }
+    [Parameter]
+    public Action MarkAsExpired { get; set; }
+    [Parameter]
+    public Action SortByExpiredOn { get; set; }
+}

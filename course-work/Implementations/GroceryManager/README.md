@@ -14,3 +14,18 @@
 - "Start" the project - you will see the both server (blank page) & client page.
 ### DB
 - The Blazor application will use dynamic in memory DB.
+### Step 4
+- Add folder in "GM.Client" -> ViewModels.
+- In this folder "ViewModels" add new class "GloceryViewModel.cs".
+### Step 5
+- Add another folder under "GM.Client" -> Data.
+- Add new item -> interface, in folder "Data" -> "IGloceryDataAccess.cs".
+- Under GM.Client / Data -> Add class "GlocerySimpleData.cs".
+- Under GM.Client / Data -> Add class "MockGlocerySimpleData.cs".
+### Step 6 
+- GM.Client / Dependecies -> right mouse button -> choose "Add project refference".
+- Check the mark on the row "GM.Models".
+### Step 7 
+- Under GM.Client / Dependecies / Packages -> right button -> Manage NuGet Packages -> Add "Simple.Odata.Client" (5.25) -> Install -> I Agree.
+### Step 8
+

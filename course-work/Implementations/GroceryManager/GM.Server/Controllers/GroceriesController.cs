@@ -40,38 +40,38 @@ namespace GM.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var workOut = await _context.Groceries.FindAsync(id);
+            var grocery = await _context.Groceries.FindAsync(id);
 
-            if (workOut == null)
+            if (grocery == null)
             {
                 return NotFound();
             }
 
-            return Ok(workOut);
+            return Ok(grocery);
         }
 
         // PATCH: api/Grocery(5)
         [ODataRoute("({id})")]
-        public async Task<IActionResult> Patch([FromODataUri] int id, [FromBody]Grocery workOut)
+        public async Task<IActionResult> Patch([FromODataUri] int id, [FromBody]Grocery grocery)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != workOut.Id)
+            if (id != grocery.Id)
             {
                 return BadRequest();
             }
 
-            var check = _context.Groceries.Where(item => item.Id == workOut.Id).First();
+            var check = _context.Groceries.Where(item => item.Id == grocery.Id).First();
 
-            if (!check.IsExpire && workOut.IsExpire)
+            if (!check.IsExpire && grocery.IsExpire)
             {
                 check.MarkAsExpire();
             }
 
-            check.Name = workOut.Name;
+            check.Name = grocery.Name;
 
             try
             {
@@ -94,17 +94,17 @@ namespace GM.Server.Controllers
 
         // POST: api/Grocery
         [ODataRoute]
-        public async Task<IActionResult> Post([FromBody] Grocery workOut)
+        public async Task<IActionResult> Post([FromBody] Grocery grocery)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Groceries.Add(workOut);
+            _context.Groceries.Add(grocery);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetWorkOut", new { id = workOut.Id }, workOut);
+            return CreatedAtAction("GetGrocery", new { id = grocery.Id }, grocery);
         }
 
         // DELETE: api/Grocery(5)
@@ -116,16 +116,16 @@ namespace GM.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var workOut = await _context.Groceries.FindAsync(id);
-            if (workOut == null)
+            var grocery = await _context.Groceries.FindAsync(id);
+            if (grocery == null)
             {
                 return NotFound();
             }
 
-            _context.Groceries.Remove(workOut);
+            _context.Groceries.Remove(grocery);
             await _context.SaveChangesAsync();
 
-            return Ok(workOut);
+            return Ok(grocery);
         }
 
         private bool GroceryExists(int id)
