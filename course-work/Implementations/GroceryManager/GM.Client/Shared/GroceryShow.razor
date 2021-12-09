@@ -1,19 +1,25 @@
 ﻿@using GM.Models;
 
-<div>
-    <button @onclick="Delete">Delete</button>&nbsp;
+<tr>
     @if (CurrentItem.IsExpire)
-    { 
-        <p class="alert-info">@CurrentItem.Name</p>
-        <p>Completed on: @CurrentItem.ExpireOn</p>
+    {
+        <td class="alert-info">@CurrentItem.Name</td>
     }
-    else 
-    { 
-        <button @onclick="MarkAsExpired">Done</button>
-        <p>@CurrentItem.Name</p>
+    else
+    {
+        <td>@CurrentItem.Name</td>
     }
-<p>Created on: @CurrentItem.CreatedOn</p>
-</div>
+    <td>@CurrentItem.CreatedOn</td>
+    @if (CurrentItem.IsExpire)
+    {
+        <td>@CurrentItem.ExpireOn</td>
+    }
+    else
+    {
+        <td><button @onclick="MarkAsExpired">Mark as Expired</button></td>
+    }
+    <td><button @onclick="Delete">Delete</button></td>
+</tr>
 
 @code {
     [Parameter]

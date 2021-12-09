@@ -4,38 +4,40 @@
 
 @inject GroceryViewModel viewModel;
 
-<h2>Grocery List</h2>
-
-<p>Show all grocery (incl. expired):
-    <input type="checkbox" @bind-value="viewModel.ShowAll" />
-</p>
-<p>
-    Sort by created on:
-    <input type="checkbox" @bind-value="viewModel.SortByCreatedOn" />
-</p>
-@if (viewModel.ShowAll && !viewModel.SortByCreatedOn)
-{ 
-<p>
-    Sort by expired on:
-    <input type="checkbox" @bind-value="viewModel.SortByExpiredOn" />
-</p>
-}
-<p>Enter new item:</p>
+<p>Add new item:</p>
 @if (viewModel.ValidationErrors)
 {
     <GroceryError Errors="@viewModel.Errors"></GroceryError>
 }
-
 <p>
     <input name="newItem" type="text"
            @ref="InputBox"
            @attributes="inputAttributes"
            @bind-value="@viewModel.NewName"
-           @bind-value:event="oninput"/>
+           @bind-value:event="oninput" />
     <button @attributes="btnAttributes"
-            @onclick="@(async () => await viewModel.AddNewAsync())"
-            >Save</button>
+            @onclick="@(async () => await viewModel.AddNewAsync())">
+        Save
+    </button>
 </p>
+
+<div class="container-sm">
+    Show all items (incl. expired):
+    <input type="checkbox" @bind-value="viewModel.ShowAll" />
+</div>
+
+<div class="container-sm">
+    Sort by created on:
+    <input type="checkbox" @bind-value="viewModel.SortByCreatedOn" />
+</div>
+
+@if (viewModel.ShowAll && !viewModel.SortByCreatedOn)
+{
+    <div class="container-sm">
+        Sort by expired on:
+        <input type="checkbox" @bind-value="viewModel.SortByExpiredOn" />
+    </div>
+}
 
 @if (groceries == null || viewModel.Loading)
 {
@@ -43,13 +45,26 @@
 }
 else
 {
-    @foreach (Grocery grocery in groceries)
-    {
-        <hr />
-        <GroceryShow CurrentItem="@grocery"
-                     Delete="@(async () => await viewModel.DeleteAsync(grocery))"
-                     MarkAsExpired="@(async () => await viewModel.MarkGroceryAsExpiredAsync(grocery))"></GroceryShow>
-    }
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">Expired On</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Grocery grocery in groceries)
+                {
+                    <GroceryShow CurrentItem="@grocery"
+                                 Delete="@(async () => await viewModel.DeleteAsync(grocery))"
+                                 MarkAsExpired="@(async () => await viewModel.MarkGroceryAsExpiredAsync(grocery))"></GroceryShow>
+                }
+            </tbody>
+        </table>
+    </div>
 }
 
 @code {
@@ -57,9 +72,9 @@ else
     public List<Grocery> groceries;
 
     public Dictionary<string, object> btnAttributes = new Dictionary<string, object>()
-        {
-            { "disabled", "" }
-        };
+{
+{ "disabled", "" }
+};
     public Dictionary<string, object> inputAttributes = new Dictionary<string, object>() { };
 
     private void CheckButton()
