@@ -4,12 +4,11 @@
 
 @inject GroceryViewModel viewModel;
 
-<p>Add new item:</p>
+<p>Add new item:
 @if (viewModel.ValidationErrors)
 {
     <GroceryError Errors="@viewModel.Errors"></GroceryError>
 }
-<p>
     <input name="newItem" type="text"
            @ref="InputBox"
            @attributes="inputAttributes"

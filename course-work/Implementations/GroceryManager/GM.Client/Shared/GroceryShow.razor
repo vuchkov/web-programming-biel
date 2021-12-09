@@ -3,7 +3,7 @@
 <tr>
     @if (CurrentItem.IsExpire)
     {
-        <td class="alert-info">@CurrentItem.Name</td>
+        <td><span class="text-danger">@CurrentItem.Name</span></td>
     }
     else
     {
@@ -12,7 +12,7 @@
     <td>@CurrentItem.CreatedOn</td>
     @if (CurrentItem.IsExpire)
     {
-        <td>@CurrentItem.ExpireOn</td>
+        <td class="text-danger">@CurrentItem.ExpireOn</td>
     }
     else
     {
