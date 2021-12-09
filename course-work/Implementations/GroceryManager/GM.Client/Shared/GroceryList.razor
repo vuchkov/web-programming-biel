@@ -1,9 +1,9 @@
-﻿
-@using GM.Models;
+﻿@using GM.Models;
 @using GM.Client.ViewModels;
 
 @inject GroceryViewModel viewModel;
 
+<div class="row"><div class="col-sm">
 <p>Add new item:
 @if (viewModel.ValidationErrors)
 {
@@ -19,24 +19,29 @@
         Save
     </button>
 </p>
+</div></div>
 
-<div class="container-sm">
-    Show all items (incl. expired):
-    <input type="checkbox" @bind-value="viewModel.ShowAll" />
-</div>
-
-<div class="container-sm">
-    Sort by created on:
-    <input type="checkbox" @bind-value="viewModel.SortByCreatedOn" />
-</div>
-
-@if (viewModel.ShowAll && !viewModel.SortByCreatedOn)
-{
-    <div class="container-sm">
-        Sort by expired on:
-        <input type="checkbox" @bind-value="viewModel.SortByExpiredOn" />
+<div class="row">
+    <div class="col-sm">
+        <p>Show all items (incl. expired):
+        <input type="checkbox" @bind-value="viewModel.ShowAll" />
+        </p>
     </div>
-}
+    <div class="col-sm">
+        <p>Sort by created on:
+        <input type="checkbox" @bind-value="viewModel.SortByCreatedOn" />
+        </p>
+    </div>
+    <div class="col-sm">
+        @if (viewModel.ShowAll && !viewModel.SortByCreatedOn)
+        {
+        <p>
+            Sort by expired on:
+            <input type="checkbox" @bind-value="viewModel.SortByExpiredOn" />
+        </p>
+        }
+    </div>
+</div>
 
 @if (groceries == null || viewModel.Loading)
 {
@@ -48,9 +53,9 @@ else
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Item Name</th>
-                    <th scope="col">Created On</th>
-                    <th scope="col">Expired On</th>
+                    <th scope="col">Item name</th>
+                    <th scope="col">Created on</th>
+                    <th scope="col">Expired on</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
